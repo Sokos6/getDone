@@ -9,15 +9,27 @@ class TodoList extends Component {
     this.state = { items: ["Item #1", "Item #2", "Item #3"] };
 
     this.addTodo = this.addTodo.bind(this);
+    this.removeTodo = this.removeTodo.bind(this);
   }
 
   addTodo(item) {
     this.setState({ items: [...this.state.items, item] });
   }
 
+  removeTodo(removeItem) {
+    const filteredItems = this.state.items.filter(description => {
+      return description !== removeItem;
+    });
+    this.setState({ items: filteredItems });
+  }
+
   renderItems() {
     return this.state.items.map(description => (
-      <Todo key={description} description={description} />
+      <Todo
+        key={description}
+        description={description}
+        removeTodo={this.removeTodo}
+      />
     ));
   }
 
