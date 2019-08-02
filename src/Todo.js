@@ -8,9 +8,21 @@ class Todo extends Component {
             description: props.description,
             done: false
         };
+        this.markAsDone = this.markAsDone.bind(this);
     }
+
+    markAsDone() {
+        this.setState({ done: true});
+    }
+
     render() {
-        return <div className="Todo">{this.state.description}</div>;
+        return (
+            <div className={'Todo' + (this.state.done ? ' Done' : '')}>
+                {this.state.description}
+                <br />
+                <button onClick={this.markAsDone}>Mark as Done</button>
+            </div>
+        );
     }
 }
 
