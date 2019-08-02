@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Todo from "./Todo";
 import "./TodoList.css";
 import NewTodo from "./NewTodo";
+import Divider from "./Divider";
 
 class TodoList extends Component {
   constructor(props) {
@@ -25,11 +26,14 @@ class TodoList extends Component {
 
   renderItems() {
     return this.state.items.map(description => (
-      <Todo
-        key={description}
-        description={description}
-        removeTodo={this.removeTodo}
-      />
+      <div key={"div-" + description}>
+        <Todo
+          key={description}
+          description={description}
+          removeTodo={this.removeTodo}
+        />
+        <Divider key={"divide-" + description} />
+      </div>
     ));
   }
 
