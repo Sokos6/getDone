@@ -23,4 +23,12 @@ describe(Todo, () => {
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it("render a Todo component", () => {
+      expect(component.contains(<div className="Todo" />));
+  })
+
+  it("contains the description", () => {
+      expect(component.text()).toContain(description);
+  })
 });

@@ -33,8 +33,8 @@ class Todo extends Component {
             <div className={this.cssClasses()}>
                 {this.state.description}
                 <br />
-                <button onClick={this.markAsDone}>Mark as Done</button>
-                <button onClick={this.removeTodo}>Remove Me</button>
+                <button className="MarkDone" onClick={this.markAsDone}>Mark as Done</button>
+                <button className="RemoveTodo" onClick={this.removeTodo}>Remove Me</button>
             </div>
         );
     }
