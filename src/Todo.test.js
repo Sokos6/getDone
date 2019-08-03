@@ -26,9 +26,19 @@ describe(Todo, () => {
 
   it("render a Todo component", () => {
       expect(component.contains(<div className="Todo" />));
-  })
+  });
 
   it("contains the description", () => {
       expect(component.text()).toContain(description);
-  })
+  });
+
+  it("marks the Todo as done", () => {
+      component.find("button.MarkDone").simulate("click");
+      expect(component.state("done")).toEqual(true);
+  });
+
+  it("calls the mock remove function", () => {
+      component.find("button.RemoveTodo").simulate("click");
+      expect(mockRemoveTodo).toHaveBeenCalled();
+  });
 });
