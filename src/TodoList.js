@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
 import Todo from "./Todo";
 import "./TodoList.css";
+
 import NewTodo from "./NewTodo";
 import Divider from "./Divider";
 
@@ -20,31 +21,27 @@ class TodoList extends Component {
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
   }
-
   addTodo(item) {
     this.setState({ items: [...this.state.items, item] });
   }
-
   removeTodo(removeItem) {
     const filteredItems = this.state.items.filter(description => {
       return description !== removeItem;
     });
     this.setState({ items: filteredItems });
   }
-
   renderItems() {
     return this.state.items.map(description => (
-      <div key={"div-" + description}>
+      <Fragment key={"item-" + description}>
         <Todo
           key={description}
           description={description}
           removeTodo={this.removeTodo}
         />
         <Divider key={"divide-" + description} />
-      </div>
+      </Fragment>
     ));
   }
-
   render() {
     return (
       <div className="TodoList">
@@ -54,4 +51,5 @@ class TodoList extends Component {
     );
   }
 }
+
 export default TodoList;
