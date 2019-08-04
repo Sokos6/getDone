@@ -24,4 +24,28 @@ describe(NewTodo, () => {
   it("render a Todo component", () => {
     expect(component.contains(<div className="NewTodo" />));
   });
+
+  it("contains the form", () => {
+      expect(component.find('input')).toHaveLength(1);
+      expect(component.find("button")).toHaveLength(1);
+  });
+
+  it("calls the passed in addTodo function when add button is clicked", () => {
+      component.find("button").simulate("click");
+      expect(mockAddTodo).toBeCalled();
+  });
+
+  it("updates the form when keys are pressed", () => {
+      const updateKey = "New Todo";
+      component.instance().handleUpdate({ target: { value: updateKey } });
+      expect(component.state("item")).toEqual(updateKey);
+  });
+
+  it("blanks out the Todo Name when the button is clicked", () => {
+    const updateKey = "I should be empty";
+    component.instance().handleUpdate({ target: { value: updateKey } });
+    expect(component.state("item")).toEqual(updateKey);
+    component.find("button").simulate("click");
+    expect(component.state("item")).toHaveLength(0);
+    });
 });
