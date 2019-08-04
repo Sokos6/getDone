@@ -4,7 +4,7 @@ import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 
 import Todo from "./Todo";
-import setupTests from "./setupTests"
+import setupTests from "../setupTests"
 
 describe(Todo, () => {
   const description = "New Todo";

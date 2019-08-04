@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-import TodoList from "./TodoList";
+import TodoList from "../TodoList";
 
 const details = {
  header: "getDone",
