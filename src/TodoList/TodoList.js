@@ -15,33 +15,55 @@ class TodoList extends Component {
       "Eat a cookie"
     ];
     this.state = {
-      items: [item1, item2, rest.join(" and ")]
+      items: [],
+      loaded: false
     };
 
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
   }
-  addTodo(item) {
-    this.setState({ items: [...this.state.items, item] });
+  addTodo(description) {
+    const newItem = {
+      description: description,
+      done: false,
+      critical: false
+    };
+    this.setState({
+      items: [...this.state.items, newItem]
+    });
   }
   removeTodo(removeItem) {
-    const filteredItems = this.state.items.filter(description => {
-      return description !== removeItem;
+    const filteredItems = this.state.items.filter(todo => {
+      return todo.description !== removeItem;
     });
     this.setState({ items: filteredItems });
   }
   renderItems() {
-    return this.state.items.map(description => (
-      <Fragment key={"item-" + description}>
-        <Todo
-          key={description}
-          description={description}
-          removeTodo={this.removeTodo}
-        />
-        <Divider key={"divide-" + description} />
-      </Fragment>
-    ));
+    if (this.state.loaded) {
+      return this.state.items.map(todo => (
+        <Fragment key={"item-" + todo.description}>
+          <Todo
+            id={todo.id}
+            key={todo.id}
+            description={todo.description}
+            removeTodo={this.removeTodo}
+            done={todo.done}
+            critical={todo.critical}
+          />
+          <Divider key={"divide-" + todo.description} />
+        </Fragment>
+      ));
+    } else {
+      return <p>Still Loading...</p>;
+    }
   }
+
+  async componentDidMount() {
+    const res = await fetch('/api/todos', {accept: 'application/json'});
+    const json = await res.json();
+    this.setState({ items: json.todos, loaded: true});
+  }
+
   render() {
     return (
       <div className="TodoList">
