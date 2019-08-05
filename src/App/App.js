@@ -20,10 +20,4 @@ const App = () => (
  </div>
 );
 
-const header = ({
- header: title = "Todo List",
- headerColor: color = "blue",
- background: background = "none"
-}) => <h2 style={{ color: color, background: background }}>{title}</h2>;
-
 export default App;
