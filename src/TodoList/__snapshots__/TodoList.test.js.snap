@@ -20,10 +20,13 @@ exports[`TodoList renders and matches our snapshot 1`] = `
     </button>
   </div>
   <div
-    className="Todo"
+    className="todo"
   >
     Write some code
     <br />
+    <hr
+      className="hr"
+    />
     <button
       className="MarkDone"
       onClick={[Function]}
@@ -36,6 +39,12 @@ exports[`TodoList renders and matches our snapshot 1`] = `
     >
       Remove Me
     </button>
+    <button
+      className="MarkCritical"
+      onClick={[Function]}
+    >
+      Mark as Critical
+    </button>
   </div>
   <div
     className="Divider"
@@ -43,10 +52,13 @@ exports[`TodoList renders and matches our snapshot 1`] = `
     <hr />
   </div>
   <div
-    className="Todo"
+    className="todo"
   >
     Change the world
     <br />
+    <hr
+      className="hr"
+    />
     <button
       className="MarkDone"
       onClick={[Function]}
@@ -58,6 +70,12 @@ exports[`TodoList renders and matches our snapshot 1`] = `
       onClick={[Function]}
     >
       Remove Me
+    </button>
+    <button
+      className="MarkCritical"
+      onClick={[Function]}
+    >
+      Mark as Critical
     </button>
   </div>
   <div
@@ -66,10 +84,13 @@ exports[`TodoList renders and matches our snapshot 1`] = `
     <hr />
   </div>
   <div
-    className="Todo"
+    className="todo"
   >
     Take a nap and Eat a cookie
     <br />
+    <hr
+      className="hr"
+    />
     <button
       className="MarkDone"
       onClick={[Function]}
@@ -81,6 +102,12 @@ exports[`TodoList renders and matches our snapshot 1`] = `
       onClick={[Function]}
     >
       Remove Me
+    </button>
+    <button
+      className="MarkCritical"
+      onClick={[Function]}
+    >
+      Mark as Critical
     </button>
   </div>
   <div

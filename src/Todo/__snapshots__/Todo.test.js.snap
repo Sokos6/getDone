@@ -2,10 +2,13 @@
 
 exports[`Todo renders and matches our snapshot 1`] = `
 <div
-  className="Todo"
+  className="todo"
 >
   Yo
   <br />
+  <hr
+    className="hr"
+  />
   <button
     className="MarkDone"
     onClick={[Function]}
@@ -17,6 +20,12 @@ exports[`Todo renders and matches our snapshot 1`] = `
     onClick={[Function]}
   >
     Remove Me
+  </button>
+  <button
+    className="MarkCritical"
+    onClick={[Function]}
+  >
+    Mark as Critical
   </button>
 </div>
 `;
