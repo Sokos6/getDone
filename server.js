@@ -20,3 +20,8 @@ app.post("/api/todos", (req, res) => {
   const body = { id: todos.length + 1, ...req.body };
   res.json({ todos: [...todos, body] });
 });
+
+app.delete("/api/todos/:id", (req, res) => {
+    const todoId = parseInt(req.params.id);
+    res.json({ todos: todos.filter(t => t.id !== todoId) });
+});
