@@ -41,4 +41,10 @@ describe(Todo, () => {
       component.find("Button.RemoveTodo").simulate("click");
       expect(mockRemoveTodo).toHaveBeenCalled();
   });
+
+  it("marks the Todo as critical", () => {
+    expect(component.state("critical")).toEqual(false);
+    component.find("Button.MarkCritical").simulate("click");
+    expect(component.state("critical")).toEqual(true);
+  })
 });
