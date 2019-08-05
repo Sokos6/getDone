@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button, ButtonGroup } from "reactstrap";
 import styles from "./Todo.module.scss";
 
 class Todo extends Component {
@@ -45,15 +46,29 @@ class Todo extends Component {
         {this.props.description}
         <br />
         <hr className={styles.hr} />
-        <button className="MarkDone" onClick={this.markAsDone}>
-          Mark as Done
-        </button>
-        <button className="RemoveTodo" onClick={this.removeTodo}>
-          Remove Me
-        </button>
-        <button className="MarkCritical" onClick={this.markCritical}>
+        <ButtonGroup>
+          <Button
+            className="MarkDone"
+            onClick={this.markAsDone}
+            color="success"
+          >
+            Mark as Done
+          </Button>
+          <Button
+            className="RemoveTodo"
+            onClick={this.removeTodo}
+            color="warning"
+          >
+            Remove Me
+          </Button>
+          <Button
+            className="MarkCritical"
+            onClick={this.markCritical}
+            color="danger"
+          >
             Mark as Critical
-        </button>
+          </Button>
+        </ButtonGroup>
       </div>
     );
   }
