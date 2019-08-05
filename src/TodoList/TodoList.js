@@ -22,15 +22,38 @@ class TodoList extends Component {
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
   }
-  addTodo(description) {
-    const newItem = {
-      description: description,
-      done: false,
-      critical: false
-    };
-    this.setState({
-      items: [...this.state.items, newItem]
+  async addTodo(description) {
+    const res = await fetch("/api/todos", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        description: description,
+        critical: false,
+        done: false
+      })
     });
+    if (res.status === 200) {
+      const newItem = {
+        id: this.state.items.length + 1,
+        description: description,
+        done: false,
+        critical: false
+      };
+      this.setState({
+        items: [...this.state.items, newItem]
+      });
+    }
+    // const newItem = {
+    //   description: description,
+    //   done: false,
+    //   critical: false
+    // };
+    // this.setState({
+    //   items: [...this.state.items, newItem]
+    // });
   }
   removeTodo(removeItem) {
     const filteredItems = this.state.items.filter(todo => {
@@ -59,9 +82,9 @@ class TodoList extends Component {
   }
 
   async componentDidMount() {
-    const res = await fetch('/api/todos', {accept: 'application/json'});
+    const res = await fetch("/api/todos", { accept: "application/json" });
     const json = await res.json();
-    this.setState({ items: json.todos, loaded: true});
+    this.setState({ items: json.todos, loaded: true });
   }
 
   render() {
