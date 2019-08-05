@@ -55,11 +55,20 @@ class TodoList extends Component {
     //   items: [...this.state.items, newItem]
     // });
   }
-  removeTodo(removeItem) {
-    const filteredItems = this.state.items.filter(todo => {
-      return todo.description !== removeItem;
+  async removeTodo(removeItemId) {
+    const res = await fetch(`/api/todos/${removeItemId}`, {
+      method: "DELETE",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json"
+      }
     });
-    this.setState({ items: filteredItems });
+    if (res.status === 200) {
+      const filteredItems = this.state.items.filter(todo => {
+        return todo.id !== removeItemId;
+      });
+      this.setState({ items: filteredItems });
+    }
   }
   renderItems() {
     if (this.state.loaded) {

@@ -36,7 +36,7 @@ class Todo extends Component {
   }
 
   removeTodo() {
-    this.props.removeTodo(this.state.description);
+    this.props.removeTodo(this.props.id);
   }
 
   render() {
