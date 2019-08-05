@@ -1,22 +1,20 @@
 import React from "react";
 import "./App.css";
+import { Navbar, NavbarBrand } from "reactstrap";
 
 import TodoList from "../TodoList";
 
-const details = {
- header: "getDone",
- headerColor: "red"
-};
+const headerTitle = "getDone";
 
-const moreDetails = {
- ...details,
- header: "getDone",
- background: "black"
-};
+const headerDisplay = (title) => (
+    <Navbar color="dark" dark expand="md">
+        <NavbarBrand href="/">{title}</NavbarBrand>
+    </Navbar>
+);
 
 const App = () => (
  <div className="App">
- {header(moreDetails)}
+ {headerDisplay(headerTitle)}
  <br />
  <TodoList />
  </div>
