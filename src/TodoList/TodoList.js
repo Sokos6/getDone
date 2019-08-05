@@ -5,6 +5,8 @@ import "./TodoList.css";
 import NewTodo from "../NewTodo";
 import Divider from "../Divider";
 
+import { fetchTodos, createTodo, deleteTodo } from "../TodoService";
+
 class TodoList extends Component {
   constructor(props) {
     super(props);
@@ -23,53 +25,28 @@ class TodoList extends Component {
     this.removeTodo = this.removeTodo.bind(this);
   }
   async addTodo(description) {
-    const res = await fetch("/api/todos", {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json"
-      },
-      body: JSON.stringify({
-        description: description,
-        critical: false,
-        done: false
-      })
-    });
-    if (res.status === 200) {
+    const { status } = await createTodo(description);
+    if (status === 200) {
       const newItem = {
         id: this.state.items.length + 1,
         description: description,
         done: false,
         critical: false
       };
-      this.setState({
-        items: [...this.state.items, newItem]
-      });
+      this.setState({ items: [...this.state.items, newItem] });
     }
-    // const newItem = {
-    //   description: description,
-    //   done: false,
-    //   critical: false
-    // };
-    // this.setState({
-    //   items: [...this.state.items, newItem]
-    // });
   }
-  async removeTodo(removeItemId) {
-    const res = await fetch(`/api/todos/${removeItemId}`, {
-      method: "DELETE",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json"
-      }
-    });
-    if (res.status === 200) {
+
+  async removeTodo(todoId) {
+    const { status } = await deleteTodo(todoId);
+    if (status === 200) {
       const filteredItems = this.state.items.filter(todo => {
-        return todo.id !== removeItemId;
+        return todo.id !== todoId;
       });
       this.setState({ items: filteredItems });
     }
   }
+
   renderItems() {
     if (this.state.loaded) {
       return this.state.items.map(todo => (
@@ -91,9 +68,8 @@ class TodoList extends Component {
   }
 
   async componentDidMount() {
-    const res = await fetch("/api/todos", { accept: "application/json" });
-    const json = await res.json();
-    this.setState({ items: json.todos, loaded: true });
+    const { todos } = await fetchTodos();
+    this.setState({ items: todos, loaded: true });
   }
 
   render() {
